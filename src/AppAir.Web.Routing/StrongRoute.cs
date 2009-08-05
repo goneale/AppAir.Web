@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -19,6 +20,29 @@ namespace AppAir.Web.Routing
         }
 
         public string Key { get; set; }
+
+        public void Register(RouteCollection routes)
+        {
+            routes.Add(this.Key, this);
+        }
+
+        public static StrongRoute MapRegex<TController>(string url, Expression<Func<TController, ActionResult>> action)
+            where TController : Controller
+        {
+            return MapRegex(url, action, false);
+        }
+
+        public static StrongRoute MapRegex<TController>(string url, Expression<Func<TController, ActionResult>> action, bool useDefaults)
+            where TController : Controller
+        {
+            return Map(new Regex(url), action, useDefaults);
+        }
+
+        public static StrongRoute Map<TController>(Regex url, Expression<Func<TController, ActionResult>> action, bool useDefaults)
+            where TController : Controller
+        {
+            throw new NotImplementedException();
+        }
 
         public static StrongRoute Map<TController>(string url, Expression<Func<TController, ActionResult>> action)
             where TController : Controller
@@ -69,9 +93,5 @@ namespace AppAir.Web.Routing
             return route;
         }
 
-        public void Register(RouteCollection routes)
-        {
-            routes.Add(this.Key, this);
-        }
     }
 }
