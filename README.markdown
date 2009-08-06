@@ -1,13 +1,16 @@
-AppAir.Web.Routing
+AppAir.Web
 ==================
-
-Currently only contains StrongRoute which is an example of how to have strongly typed routes.
-There is some Html and Url helper extensions that go with these but they will be added later as apart of AppAir.Web
 
 Usage
 -----
-    
-    
+
+View
+
+    <%=Html.LinkTo("Register", UserRoutes.Register)%>
+    <a href="<%=Url.LinkTo(UserRoutes.Register)%>">Register</a>
+
+Global.asax
+  
     public class MvcApplication : System.Web.HttpApplication
     {
 		public static void RegisterRoutes(RouteCollection routes)
@@ -36,5 +39,3 @@ Usage
 			= StrongRoute.Map<UserController>("login", c => c.Login());
 	}
 
-        <%=Html.LinkTo("Register", UserRoutes.Register)%>
-        <a href="<%=Url.LinkTo(UserRoutes.Register)%>">Register</a>
