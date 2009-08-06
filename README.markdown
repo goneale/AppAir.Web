@@ -35,3 +35,6 @@ Usage
 		public static readonly StrongRoute Login 
 			= StrongRoute.Map<UserController>("login", c => c.Login());
 	}
+
+        <%=Html.LinkTo("Register", UserRoutes.Register)%>
+        <a href="<%=Url.LinkTo(UserRoutes.Register)%>">Register</a>
