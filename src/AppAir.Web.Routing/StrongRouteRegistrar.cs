@@ -35,7 +35,17 @@ namespace AppAir.Web.Routing
                 sr.Key = t.Name + ":" + field.Name + "_" + sr.Key;
 
                 var order = int.MaxValue;
-                if (routeOrder != null) order = routeOrder.Order;
+                if (routeOrder != null)
+                {
+                    order = routeOrder.Order;
+                }
+                else
+                {
+                    while (discoveredRoutes.ContainsKey(order))
+                        order--;
+                }
+
+
                 discoveredRoutes.Add(order, sr);
             }
 

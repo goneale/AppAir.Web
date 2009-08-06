@@ -17,6 +17,21 @@ namespace AppAir.Web
             return LinkTo(htmlHelper, linkText, route, routeValues, null);
         }
 
+        public static string LinkTo(this HtmlHelper htmlHelper, string linkText, Route route, object routeValues)
+        {
+            return LinkTo(htmlHelper, linkText, route, new RouteValueDictionary(routeValues), null);
+        }
+
+        public static string LinkTo(this HtmlHelper htmlHelper, string linkText, Route route, object routeValues, RouteValueDictionary attributes)
+        {
+            return LinkTo(htmlHelper, linkText, route, new RouteValueDictionary(routeValues), attributes);
+        }
+
+        public static string LinkTo(this HtmlHelper htmlHelper, string linkText, Route route, RouteValueDictionary routeValues, object attributes)
+        {
+            return LinkTo(htmlHelper, linkText, route, routeValues, new RouteValueDictionary(attributes));
+        }
+
         public static string LinkTo(this HtmlHelper htmlHelper, string linkText, Route route, RouteValueDictionary routeValues, RouteValueDictionary attributes)
         {
             var url = GenerateUrl(htmlHelper, route, routeValues);
@@ -50,7 +65,7 @@ namespace AppAir.Web
             if (vpd == null)
                 return null;
 
-            return vpd.VirtualPath;
+            return httpCtx.Request.ApplicationPath + vpd.VirtualPath;
         }
     }
 }

@@ -12,6 +12,11 @@ namespace AppAir.Web
             return LinkTo(urlHelper, route, null);
         }
 
+        public static string LinkTo(this UrlHelper urlHelper, Route route, object routeValues)
+        {
+            return LinkTo(urlHelper, route, new RouteValueDictionary(routeValues));
+        }
+
         public static string LinkTo(this UrlHelper urlHelper, Route route, RouteValueDictionary routeValues)
         {
             //TODO: remove code dupe see HtmlLinkToExtensions
@@ -35,7 +40,7 @@ namespace AppAir.Web
             if (vpd == null)
                 return null;
 
-            return vpd.VirtualPath;
+            return httpCtx.Request.ApplicationPath + vpd.VirtualPath;
 
         }
     }
